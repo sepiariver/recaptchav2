@@ -13,8 +13,10 @@
             }]
             ,"chunks": [{
                 "name": "recaptchav2_html"
-              }, {
+            }, {
                 "name": "sample_formit_contact_form"
+            }, {
+                "name": "sample_formit_contact_eml"
             }]
         }
         ,"systemSettings": [{

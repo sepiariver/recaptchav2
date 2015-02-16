@@ -1,6 +1,6 @@
 [[!FormIt?
    &hooks=`recaptchav2,email`
-   &emailTpl=`my_custom_eml_tpl`
+   &emailTpl=`sample_formit_contact_eml`
    &emailTo=`[[++emailsender]]`
    &emailSubject=`Contact from website`
    &validate=`name:required,
