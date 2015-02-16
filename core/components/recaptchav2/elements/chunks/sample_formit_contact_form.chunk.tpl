@@ -1,7 +1,7 @@
 [[!FormIt?
    &hooks=`recaptchav2,email`
    &emailTpl=`my_custom_eml_tpl`
-   &emailTo=`[[++email_sender]]`
+   &emailTo=`[[++emailsender]]`
    &emailSubject=`Contact from website`
    &validate=`name:required,
       email:email:required,
