@@ -1,58 +1,35 @@
 {
-    "name": "Package"
-    ,"lowCaseName": "package"
-    ,"description": "Package description"
-    ,"author": "Author name"
-    ,"version": "1.0.0"
+    "name": "ReCaptchaV2"
+    ,"lowCaseName": "recaptchav2"
+    ,"description": "ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a FormIt hook."
+    ,"author": "YJ Tso @sepiariver"
+    ,"version": "0.9"
     ,"package":{
-        "actions": [{
-            "id": 1
-            ,"controller": "index"
-        }]
-        ,"menus": [{
-            "text": "package"
-            ,"action": 1
-        }]
-        ,"elements": {
-            "plugins": [{
-                "name": "PackagePlugin"
-                ,"events": ["OnPageNotFound"]
-            }]
-            ,"snippets": [{
-                "name": "PackageSnippet"
+        "elements": {
+            "snippets": [{
+                "name": "recaptchav2"
+            }, {
+                "name": "recaptchav2_render"
             }]
             ,"chunks": [{
-                "name": "PackageChunk"
+                "name": "recaptchav2_html"
+              }, {
+                "name": "sample_formit_contact_form"
             }]
-            ,"templates": [{
-                "name": "PackageTemplate"
-            }]
-            ,"tvs": [{
-                 "caption": "MyTV"
-                 ,"templates": ["PackageTemplate"]
-             }]
         }
-        ,"resources": [{
-            "pagetitle": "Test Resources"
-            ,"alias": "test-resources"
-            ,"content": "Test content"
-            ,"tvs": [{
-                "name": "test-tv",
-                "value": "Value for test TV"
-            }]
-        }]
         ,"systemSettings": [{
-            "key": "test_key"
-            ,"value": "it works"
+            "key": "core_path"
+            ,"name": "ReCaptcha V2 Core Path"
+            ,"value": "{core_path}components/recaptchav2/"
+        }, {
+            "key": "secret_key"
+            ,"name": "ReCaptcha V2 Secret Key"
+            ,"value": ""
+        }, {
+            "key": "site_key"
+            ,"name": "ReCaptcha V2 Site Key"
+            ,"value": ""
         }]
     }
-    ,"database": {
-        "tables": ["PackageItem"]
-    }
-    ,"extensionPackage": {}
-    ,"build": {
-        "resolver": {
-            "after": "resolver.customresolver.php"
-        }
-    }
+    
 }

@@ -2,6 +2,9 @@ ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a Fo
 
 It can also be used with the Login Extra as a preHook but this hasn't been tested as of v0.9-beta1.
 
+You must generate API keys for your domain here: https://www.google.com/recaptcha/admin
+and enter them into the System Settings before you can use ReCaptchaV2.
+
 USAGE EXAMPLE:
 
 [[!FormIt?
