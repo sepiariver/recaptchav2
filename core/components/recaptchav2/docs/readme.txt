@@ -1,0 +1,22 @@
+ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a FormIt hook.
+
+It can also be used with the Login Extra as a preHook but this hasn't been tested as of v0.9-beta1.
+
+USAGE EXAMPLE:
+
+[[!FormIt?
+   &hooks=`recaptchav2,email`
+   ...
+]]
+
+You will also need to call the accompanying form element renderer snippet somewhere in your html form, for example:
+
+<div class="form-item">
+    [[!recaptchav2_render]]
+    [[!+fi.error.recaptchav2_error]]
+</div>
+
+I tried making this usable as a preHook for FormIt but ran out of time. 
+
+This Extra is maintained in Github: https://github.com/sepiariver/recaptchav2
+Bug reports, comments and suggestions welcome.
