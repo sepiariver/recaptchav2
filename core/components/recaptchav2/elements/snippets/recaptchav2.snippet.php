@@ -36,6 +36,7 @@ $lang = $modx->getOption('cultureKey', null, 'en');
 $tech_err_msg = (!empty($hook->formit->config['technical_error_message'])) ? $hook->formit->config['technical_error_message'] : 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.';
 $recaptcha_err_msg = (!empty($hook->formit->config['recaptcha_error_message'])) ? $hook->formit->config['recaptcha_error_message'] : 'Please select the checkbox in the ReCaptcha image.';
 
+// Get the class
 $default_core_path = $modx->getOption('core_path') . 'components/recaptchav2/';
 $recaptchav2_core_path = $modx->getOption('recaptchav2.core_path', null, $default_core_path);
 $recaptchav2 = $modx->getService('recaptchav2', 'RecaptchaV2', $recaptchav2_core_path . 'model/recaptchav2/', $scriptProperties);
@@ -49,6 +50,7 @@ $resp = null;
 // The error code from reCAPTCHA, if any
 $error = null;
 
+// Initialize recaptchav2
 $reCaptcha = $recaptchav2->initReCaptcha($secret);
 if (!$reCaptcha) {
     $hook->addError('recaptchav2_error', $tech_err_msg);
@@ -60,11 +62,10 @@ if ($hook->getValue('g-recaptcha-response')) {
     $resp = $recaptchav2->verifyResponse($_SERVER["REMOTE_ADDR"], $hook->getValue('g-recaptcha-response'));
 }
 
+// Hook pass/fail
 if ($resp != null && $resp->success) {
     return true;
 } else {
     $hook->addError('recaptchav2_error', $recaptcha_err_msg);
     return false;
 }
-//$hook->addError('recaptchav2_error', __LINE__);
-//return false;

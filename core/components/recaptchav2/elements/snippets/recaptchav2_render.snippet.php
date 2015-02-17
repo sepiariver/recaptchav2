@@ -38,8 +38,9 @@ $recaptcha_html = $modx->getChunk('recaptchav2_html', array(
     'lang' => $lang,
     ));
 
-if ($hook) { // This doesn't seem to work but it's a start
-    $modx->setPlaceholder('recaptchav2_html', $recaptcha_html);
+if ($hook) { 
+    $hook->setValue('recaptchav2_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
+    return true;
 } else { // This works at least
     return $recaptcha_html;
 }

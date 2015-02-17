@@ -1,31 +1,40 @@
 {
-    "name": "ReCaptchaV2"
-    ,"lowCaseName": "recaptchav2"
-    ,"description": "ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a FormIt hook."
-    ,"author": "YJ Tso @sepiariver"
-    ,"version": "0.9.1-beta1"
-    ,"package":{
-        "elements": {
-            "snippets": [{
-                "name": "recaptchav2"
-            }, {
-                "name": "recaptchav2_render"
-            }]
-            ,"chunks": [{
-                "name": "recaptchav2_html"
-            }, {
-                "name": "sample_formit_contact_form"
-            }, {
-                "name": "sample_formit_contact_eml"
-            }]
+  "name" : "ReCaptchaV2",
+  "lowCaseName" : "recaptchav2",
+  "description" : "ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a FormIt hook.",
+  "author" : "YJ Tso @sepiariver",
+  "version" : "0.9.2-beta1",
+  "package" : {
+    "elements" : {
+      "snippets" : [
+        {
+          "name" : "recaptchav2"
+        },
+        {
+          "name" : "recaptchav2_render"
         }
-        ,"systemSettings": [{
-            "key": "secret_key"
-            ,"value": ""
-        }, {
-            "key": "site_key"
-            ,"value": ""
-        }]
-    }
-    
+      ],
+      "chunks" : [
+        {
+          "name" : "recaptchav2_html"
+        },
+        {
+          "name" : "sample_formit_contact_form"
+        },
+        {
+          "name" : "sample_formit_contact_eml"
+        }
+      ]
+    },
+    "systemSettings" : [
+      {
+        "key" : "secret_key",
+        "value" : ""
+      },
+      {
+        "key" : "site_key",
+        "value" : ""
+      }
+    ]
+  }
 }
