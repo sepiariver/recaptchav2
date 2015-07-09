@@ -28,3 +28,5 @@ I tried making the render snippet usable as a preHook for FormIt but ran out of 
 
 This Extra is maintained in Github: https://github.com/sepiariver/recaptchav2
 Bug reports, comments and suggestions welcome.
+
+See [this issue](https://github.com/sepiariver/recaptchav2/issues/2) for usage with Quip.
