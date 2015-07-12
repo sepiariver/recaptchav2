@@ -35,7 +35,7 @@
 /**
  * A ReCaptchaResponse is returned from checkAnswer().
  */
-class ReCaptchaResponse
+class ReCaptchaResponseV2
 {
     public $success;
     public $errorCodes;
@@ -127,7 +127,7 @@ class ReCaptchaV2
     {
         // Discard empty solution submissions
         if ($response == null || strlen($response) == 0) {
-            $recaptchaResponse = new ReCaptchaResponse();
+            $recaptchaResponse = new ReCaptchaResponseV2();
             $recaptchaResponse->success = false;
             $recaptchaResponse->errorCodes = 'missing-input';
             return $recaptchaResponse;
@@ -143,7 +143,7 @@ class ReCaptchaV2
             )
         );
         $answers = json_decode($getResponse, true);
-        $recaptchaResponse = new ReCaptchaResponse();
+        $recaptchaResponse = new ReCaptchaResponseV2();
 
         if (trim($answers['success']) == true) {
             $recaptchaResponse->success = true;

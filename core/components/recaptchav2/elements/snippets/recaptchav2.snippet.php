@@ -33,15 +33,21 @@ $secret = $modx->getOption('recaptchav2.secret_key', null, '');
 $lang = $modx->getOption('cultureKey', null, 'en');
 
 // Options
-$tech_err_msg = (!empty($hook->formit->config['technical_error_message'])) ? $hook->formit->config['technical_error_message'] : 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.';
-$recaptcha_err_msg = (!empty($hook->formit->config['recaptcha_error_message'])) ? $hook->formit->config['recaptcha_error_message'] : 'Please select the checkbox in the ReCaptcha image.';
+if ($hook->formit) {
+    $properties = array_merge(array(), $hook->formit->config);
+}
+
+$tech_err_msg = $modx->getOption('technical_error_message', $properties, 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.');
+$recaptcha_err_msg = $modx->getOption('recaptcha_error_message', $properties, 'Please select the checkbox in the ReCaptcha image.');
 
 // Get the class
-$default_core_path = $modx->getOption('core_path') . 'components/recaptchav2/';
-$recaptchav2_core_path = $modx->getOption('recaptchav2.core_path', null, $default_core_path);
-$recaptchav2 = $modx->getService('recaptchav2', 'RecaptchaV2', $recaptchav2_core_path . 'model/recaptchav2/', $scriptProperties);
+$recaptchav2Path = $modx->getOption('recaptchav2.core_path', null, $modx->getOption('core_path') . 'components/recaptchav2/');
+$recaptchav2Path .= 'model/recaptchav2/';
+if (file_exists($recaptchav2Path . 'recaptchav2.class.php')) $recaptchav2 = $modx->getService('recaptchav2','RecaptchaV2', $recaptchav2Path);
+
 if (!($recaptchav2 instanceof RecaptchaV2)) {
     $hook->addError('recaptchav2_error', $tech_err_msg);
+    $modx->log(modX::LOG_LEVEL_WARN, 'Failed to load recaptchav2 class.'); 
     return false;
 }
 
