@@ -43,9 +43,13 @@ $recaptcha_err_msg = $modx->getOption('recaptcha_error_message', $properties, 'P
 // Get the class
 $recaptchav2Path = $modx->getOption('recaptchav2.core_path', null, $modx->getOption('core_path') . 'components/recaptchav2/');
 $recaptchav2Path .= 'model/recaptchav2/';
-if (file_exists($recaptchav2Path . 'recaptchav2.class.php')) $recaptchav2 = $modx->getService('recaptchav2','RecaptchaV2', $recaptchav2Path);
-
-if (!($recaptchav2 instanceof RecaptchaV2)) {
+if (!file_exists($recaptchav2Path . 'autoload.php')) {
+    $modx->log(modX::LOG_LEVEL_WARN, 'Cannot find required RecaptchaV2 autoload.php file.'); 
+    return false;
+}
+require_once($recaptchav2Path . 'autoload.php');
+$recaptchav2 = new \ReCaptcha\ReCaptcha($secret);
+if (!($recaptchav2 instanceof \ReCaptcha\ReCaptcha)) {
     $hook->addError('recaptchav2_error', $tech_err_msg);
     $modx->log(modX::LOG_LEVEL_WARN, 'Failed to load recaptchav2 class.'); 
     return false;
@@ -56,20 +60,20 @@ $resp = null;
 // The error code from reCAPTCHA, if any
 $error = null;
 
-// Initialize recaptchav2
+/* Initialize recaptchav2 :: deprecated
 $reCaptcha = $recaptchav2->initReCaptcha($secret);
 if (!$reCaptcha) {
     $hook->addError('recaptchav2_error', $tech_err_msg);
     return false;
-}
+}*/
 
 // Was there a reCAPTCHA response?
 if ($hook->getValue('g-recaptcha-response')) {
-    $resp = $recaptchav2->verifyResponse($_SERVER["REMOTE_ADDR"], $hook->getValue('g-recaptcha-response'));
+    $resp = $recaptchav2->verify($hook->getValue('g-recaptcha-response'), $_SERVER["REMOTE_ADDR"]);
 }
 
 // Hook pass/fail
-if ($resp != null && $resp->success) {
+if ($resp != null && $resp->isSuccess()) {
     return true;
 } else {
     $hook->addError('recaptchav2_error', $recaptcha_err_msg);
