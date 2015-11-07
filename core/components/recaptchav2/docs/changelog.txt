@@ -1,3 +1,7 @@
+2.0.1-rc1
+=========
+Tiny bit of code cleanup
+
 2.0.0-rc1
 =========
 Update Google Recaptcha class to latest 1.1.2 

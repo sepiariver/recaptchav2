@@ -1,6 +1,6 @@
 <?php
 /**
- * Based on https://github.com/google/ReCAPTCHA/tree/master/php
+ * Based on https://github.com/google/recaptcha
  *
  * @copyright Copyright (c) 2014, Google Inc.
  * @link      http://www.google.com/recaptcha
@@ -59,13 +59,6 @@ if (!($recaptchav2 instanceof \ReCaptcha\ReCaptcha)) {
 $resp = null;
 // The error code from reCAPTCHA, if any
 $error = null;
-
-/* Initialize recaptchav2 :: deprecated
-$reCaptcha = $recaptchav2->initReCaptcha($secret);
-if (!$reCaptcha) {
-    $hook->addError('recaptchav2_error', $tech_err_msg);
-    return false;
-}*/
 
 // Was there a reCAPTCHA response?
 if ($hook->getValue('g-recaptcha-response')) {
