@@ -48,7 +48,7 @@ if (!file_exists($recaptchav2Path . 'autoload.php')) {
     return false;
 }
 require_once($recaptchav2Path . 'autoload.php');
-$recaptchav2 = new \ReCaptcha\ReCaptcha($secret);
+$recaptchav2 = new \ReCaptcha\ReCaptcha($secret, new \ReCaptcha\RequestMethod\CurlPost());
 if (!($recaptchav2 instanceof \ReCaptcha\ReCaptcha)) {
     $hook->addError('recaptchav2_error', $tech_err_msg);
     $modx->log(modX::LOG_LEVEL_WARN, 'Failed to load recaptchav2 class.'); 
@@ -70,5 +70,6 @@ if ($resp != null && $resp->isSuccess()) {
     return true;
 } else {
     $hook->addError('recaptchav2_error', $recaptcha_err_msg);
+    //DEBUG INFO: $modx->log(modX::LOG_LEVEL_ERROR, print_r($resp, true));
     return false;
 }
