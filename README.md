@@ -33,5 +33,15 @@ You will also need to call the accompanying form element renderer snippet somewh
 
 I tried making the render snippet usable as a preHook for FormIt but ran out of time. 
 
+### Themes
+
+Thanks to @syberknight for pointing out in this [forum thread](https://forums.modx.com/thread/99538/recaptcha-v2-how-to-change-it-039-s-theme#dis-post-538291) that you can select the RecaptchaV2 theme by adding a data-attribute to the ".g-recaptcha" element, in the TPL Chunk:
+
+```
+<div id="html_element" class="g-recaptcha" data-sitekey="[[+site_key]]" data-theme="dark"></div>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=[[++cultureKey]]"></script>
+```
+
+<hr>
 This Extra is maintained in Github: https://github.com/sepiariver/recaptchav2
 Bug reports, comments and suggestions welcome.
