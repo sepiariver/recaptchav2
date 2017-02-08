@@ -28,12 +28,16 @@
  * THE SOFTWARE.
  */
 
+$assets_url = $modx->getOption('recaptchav2.assets_url', null, $modx->getOption('assets_url') . 'components/recaptchav2/');
+$renderTo = $modx->getOption('renderTo', $scriptProperties, 'recaptcha');
 // Register API keys at https://www.google.com/recaptcha/admin
 $site_key = $modx->getOption('recaptchav2.site_key', null, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
 $lang = $modx->getOption('cultureKey', null, 'en');
+$callback = $modx->getOption('callback', null, 'recaptchav2Callback');
 
 $recaptcha_html = $modx->getChunk('recaptchav2_html', array(
+    'id' => $renderTo,
     'site_key' => $site_key,
     'lang' => $lang,
     ));
@@ -42,5 +46,7 @@ if ($hook) {
     $hook->setValue('recaptchav2_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
     return true;
 } else { // This works at least
+    $modx->regClientScript($assets_url.'js/'.'recaptchav2.callback.js');
+    $modx->regClientScript('https://www.google.com/recaptcha/api.js?hl='.$lang.'&onload='.$callback.'&render=explicit');
     return $recaptcha_html;
 }
