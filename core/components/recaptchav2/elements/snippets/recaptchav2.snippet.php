@@ -37,10 +37,6 @@ if ($hook->formit) {
     $properties = array_merge(array(), $hook->formit->config);
 }
 
-// Changing this to get message whith lexicon system
-// $tech_err_msg = $modx->getOption('technical_error_message', $properties, 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.');
-// $recaptcha_err_msg = $modx->getOption('recaptcha_error_message', $properties, 'Please select the checkbox in the ReCaptcha image.');
-
 // make sure the modLexicon class is loaded by instantiating 
 $modx->getService('lexicon','modLexicon');
 // load lexicon
