@@ -31,6 +31,24 @@ You will also need to call the accompanying form element renderer snippet somewh
 </div>
 ```
 
+When using multiple ReCaptcha elements, you must specify an identifier for every element after the first one, like so:
+
+```
+<div class="form-item">
+    [[!recaptchav2_render? &renderTo=`identifier`]]
+    [[!+fi.error.recaptchav2_error]]
+</div>
+```
+
+Additionally, you may specify a custom javascript callback:
+
+```
+<div class="form-item">
+    [[!recaptchav2_render? &callback=`customCallback` &renderTo=`identifier`]]
+    [[!+fi.error.recaptchav2_error]]
+</div>
+```
+
 I tried making the render snippet usable as a preHook for FormIt but ran out of time. 
 
 ### Themes
@@ -38,8 +56,7 @@ I tried making the render snippet usable as a preHook for FormIt but ran out of 
 Thanks to @syberknight for pointing out in this [forum thread](https://forums.modx.com/thread/99538/recaptcha-v2-how-to-change-it-039-s-theme#dis-post-538291) that you can select the RecaptchaV2 theme by adding a data-attribute to the ".g-recaptcha" element, in the TPL Chunk:
 
 ```
-<div id="html_element" class="g-recaptcha" data-sitekey="[[+site_key]]" data-theme="dark"></div>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=[[++cultureKey]]"></script>
+<div class="g-recaptcha" id="[[+id:default=`recaptcha`]]" data-sitekey="[[+site_key]]" data-theme="dark"></div>
 ```
 
 <hr>

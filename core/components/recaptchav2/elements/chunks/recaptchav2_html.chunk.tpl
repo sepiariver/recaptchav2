@@ -1,2 +1,1 @@
-<div class="g-recaptcha" data-sitekey="[[+site_key]]"></div>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=[[++cultureKey]]"></script>
+<div class="g-recaptcha" id="[[+id:default=`recaptcha`]]" data-sitekey="[[+site_key]]"></div>
