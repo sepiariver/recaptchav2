@@ -37,8 +37,17 @@ if ($hook->formit) {
     $properties = array_merge(array(), $hook->formit->config);
 }
 
-$tech_err_msg = $modx->getOption('technical_error_message', $properties, 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.');
-$recaptcha_err_msg = $modx->getOption('recaptcha_error_message', $properties, 'Please select the checkbox in the ReCaptcha image.');
+// Changing this to get message whith lexicon system
+// $tech_err_msg = $modx->getOption('technical_error_message', $properties, 'Sorry, there was an error submitting your form. Please use one of the contacts on this page instead.');
+// $recaptcha_err_msg = $modx->getOption('recaptcha_error_message', $properties, 'Please select the checkbox in the ReCaptcha image.');
+
+// make sure the modLexicon class is loaded by instantiating 
+$modx->getService('lexicon','modLexicon');
+// load lexicon
+$modx->lexicon->load('recaptchav2:default');
+// get the message from default.inc.php from the correct lang
+$tech_err_msg = $modx->lexicon('recaptchav2.technical_error_message');
+$recaptcha_err_msg = $modx->lexicon('recaptchav2.recaptcha_error_message');
 
 // Get the class
 $recaptchav2Path = $modx->getOption('recaptchav2.core_path', null, $modx->getOption('core_path') . 'components/recaptchav2/');
