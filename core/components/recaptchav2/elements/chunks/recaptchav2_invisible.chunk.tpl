@@ -1,12 +1,11 @@
 <script type="text/javascript" >
-    function onSubmit(token) {
-        return true;
-    }
-    var onloadCallback = function() {
-        grecaptcha.render('submit', {
-            'sitekey' : '[[++site_key]]',
-            'callback' : onSubmit
+    function onloadCallback() {
+        grecaptcha.render('[[+submitVar]]', {
+            'sitekey' : '[[+site_key]]',
+            'callback' : function (token) {
+                document.getElementById('[[+submitVar]]').closest('form').submit();
+            }
         });
-    };
+    }
 </script>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=[[++cultureKey]]" async defer ></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=[[+lang]]" async defer ></script>

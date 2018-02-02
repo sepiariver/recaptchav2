@@ -29,16 +29,21 @@
  */
 
 // Register API keys at https://www.google.com/recaptcha/admin
-$site_key = $modx->getOption('recaptchav2.site_key', null, '');
+$site_key = $modx->getOption('recaptchav2.site_key', $scriptProperties, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
-$lang = $modx->getOption('cultureKey', null, 'en');
+$lang = $modx->getOption('cultureKey', $scriptProperties, 'en');
+// Choose ReCaptcha TPL
+$tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav2_html');
+// Set the submitVar
+$submitVar = $modx->getOption('submitVar', $scriptProperties, 'submit');
 
-$recaptcha_html = $modx->getChunk('recaptchav2_html', array(
+$recaptcha_html = $modx->getChunk($tpl, array(
     'site_key' => $site_key,
     'lang' => $lang,
-    ));
+    'submitVar' => $submitVar
+));
 
-if ($hook) { 
+if ($hook) {
     $hook->setValue('recaptchav2_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
     return true;
 } else { // This works at least
