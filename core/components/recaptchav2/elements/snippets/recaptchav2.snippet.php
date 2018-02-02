@@ -64,17 +64,40 @@ if (!($recaptchav2 instanceof \ReCaptcha\ReCaptcha)) {
 $resp = null;
 // The error code from reCAPTCHA, if any
 $error = null;
-
+// Check if being used as hook
+if (isset($hook)){
 // Was there a reCAPTCHA response?
-if ($hook->getValue('g-recaptcha-response')) {
-    $resp = $recaptchav2->verify($hook->getValue('g-recaptcha-response'), $_SERVER["REMOTE_ADDR"]);
-}
+    if ($hook->getValue('g-recaptcha-response')) {
+        $resp = $recaptchav2->verify($hook->getValue('g-recaptcha-response'), $_SERVER["REMOTE_ADDR"]);
+    }
 
 // Hook pass/fail
-if ($resp != null && $resp->isSuccess()) {
-    return true;
-} else {
-    $hook->addError('recaptchav2_error', $recaptcha_err_msg);
-    //DEBUG INFO: $modx->log(modX::LOG_LEVEL_ERROR, print_r($resp, true));
-    return false;
+    if ($resp != null && $resp->isSuccess()) {
+        return true;
+    } else {
+        $hook->addError('recaptchav2_error', $recaptcha_err_msg);
+        $modx->log(modX::LOG_LEVEL_DEBUG, print_r($resp, true));
+        return false;
+    }
 }
+// Check if being used as validator
+if (isset($validator)) {
+// Was there a reCAPTCHA response?
+    if (isset($value)) {
+        $resp = $recaptchav2->verify($value, $_SERVER["REMOTE_ADDR"]);
+    }
+
+// Validator pass/fail
+    if ($resp != null && $resp->isSuccess()) {
+        return true;
+    } else {
+        $validator->addError($key, $recaptcha_err_msg);
+        $modx->log(modX::LOG_LEVEL_DEBUG, print_r($resp, true));
+        return $success;
+    }
+
+
+}
+
+// Checks failed
+return false;
