@@ -3,7 +3,7 @@
   "lowCaseName" : "recaptchav2",
   "description" : "ReCaptchaV2 integrates Version 2 of Google's ReCaptcha service into MODX as a FormIt hook.",
   "author" : "YJ Tso @sepiariver",
-  "version" : "2.2.1-beta1",
+  "version" : "2.3.0-rc1",
   "package" : {
     "elements" : {
       "snippets" : [
@@ -17,6 +17,9 @@
       "chunks" : [
         {
           "name" : "recaptchav2_html"
+        },
+        {
+          "name" : "recaptchav2_invisible_html"
         },
         {
           "name" : "sample_formit_contact_form"
