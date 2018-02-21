@@ -31,7 +31,19 @@ You will also need to call the accompanying form element renderer snippet somewh
 </div>
 ```
 
-I tried making the render snippet usable as a preHook for FormIt but ran out of time. 
+As of 2.3+, you can use the "Invisible Recaptcha" implementation:
+
+```
+<form id="login-form">
+[[!recaptchav2_render?
+    &tpl=`recaptchav2_invisible_html`
+    &form_id=`login-form`
+]]
+</form>
+```
+In this usage, the recaptchav2_invisible_html renders a button with the necessary data attributes to trigger Recaptcha.
+
+The render snippet may or may not be usable as a preHook for FormIt at this time. 
 
 This Extra is maintained in Github: https://github.com/sepiariver/recaptchav2
 Bug reports, comments and suggestions welcome.
