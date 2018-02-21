@@ -1,3 +1,8 @@
+2.3.0-rc1
+=========
+Add support for "Invisible Recaptcha" implementation
+Support custom TPL chunk
+
 2.2.1-beta1
 ===========
 Adds support for lexicons [PR 19](https://github.com/sepiariver/recaptchav2/pull/19) 
