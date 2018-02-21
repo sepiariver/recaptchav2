@@ -31,11 +31,15 @@
 // Register API keys at https://www.google.com/recaptcha/admin
 $site_key = $modx->getOption('recaptchav2.site_key', null, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
-$lang = $modx->getOption('cultureKey', null, 'en');
+$lang = $modx->getOption('cultureKey', null, 'en', true);
+// use 'recaptchav2_invisible_html' inside form element for invisible recaptcha
+$tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav2_html', true);
+$form_id = $modx->getOption('form_id', $scriptProperties, '');
 
-$recaptcha_html = $modx->getChunk('recaptchav2_html', array(
+$recaptcha_html = $modx->getChunk($tpl, array(
     'site_key' => $site_key,
     'lang' => $lang,
+    'form_id' => $form_id,
     ));
 
 if ($hook) { 
