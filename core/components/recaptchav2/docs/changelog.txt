@@ -2,6 +2,8 @@
 =========
 Add support for "Invisible Recaptcha" implementation
 Support custom TPL chunk
+Thanks to @gadgetto for German lexicons
+Thanks to @matdave for validator option
 
 2.2.1-beta1
 ===========
