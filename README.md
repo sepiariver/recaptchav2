@@ -38,6 +38,7 @@ As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 [[!recaptchav2_render?
     &tpl=`recaptchav2_invisible_html`
     &form_id=`login-form`
+    &button_caption=`Submit this form`
 ]]
 </form>
 ```
