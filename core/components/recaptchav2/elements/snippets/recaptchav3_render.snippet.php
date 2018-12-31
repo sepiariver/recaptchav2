@@ -32,6 +32,8 @@
 $site_key = $modx->getOption('recaptchav3.site_key', null, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
 $lang = $modx->getOption('cultureKey', null, 'en', true);
+// https://developers.google.com/recaptcha/docs/v3 "Actions"
+$action_key = $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true);
 // new 'recaptchav3_html' Chunk
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav3_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('uri'));
@@ -40,6 +42,7 @@ $recaptcha_html = $modx->getChunk($tpl, [
     'site_key' => $site_key,
     'lang' => $lang,
     'form_id' => $form_id,
+    'action_key' => $action_key,
 ]);
 
 if ($hook) { 
