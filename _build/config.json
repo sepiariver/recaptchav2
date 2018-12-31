@@ -12,6 +12,11 @@
         },
         {
           "name" : "recaptchav2_render"
+        },{
+          "name" : "recaptchav3"
+        },
+        {
+          "name" : "recaptchav3_render"
         }
       ],
       "chunks" : [
@@ -26,6 +31,9 @@
         },
         {
           "name" : "sample_formit_contact_eml"
+        },
+        {
+          "name" : "recaptchav3_html"
         }
       ]
     },
@@ -37,6 +45,21 @@
       {
         "key" : "site_key",
         "value" : ""
+      },
+      {
+        "key" : "secret_key",
+        "namespace": "recaptchav3",
+        "value" : ""
+      },
+      {
+        "key" : "site_key",
+        "namespace": "recaptchav3",
+        "value" : ""
+      },
+      {
+        "key" : "action_key",
+        "namespace": "recaptchav3",
+        "value" : "recaptcha-action"
       }
     ]
   }
