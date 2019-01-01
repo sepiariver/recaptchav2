@@ -1,3 +1,8 @@
+3.0.0-rc1
+=========
+Formalize support for ReCaptcha V3
+Release candidate could use more testing
+
 2.3.0-rc1
 =========
 Add support for "Invisible Recaptcha" implementation
@@ -7,7 +12,7 @@ Thanks to @matdave for validator option
 
 2.2.1-beta1
 ===========
-Adds support for lexicons [PR 19](https://github.com/sepiariver/recaptchav2/pull/19) 
+Adds support for lexicons [PR 19](https://github.com/sepiariver/recaptchav2/pull/19)
 Thanks to: https://github.com/lawebfabric
 
 2.0.2-rc1
@@ -20,7 +25,7 @@ Tiny bit of code cleanup
 
 2.0.0-rc1
 =========
-Update Google Recaptcha class to latest 1.1.2 
+Update Google Recaptcha class to latest 1.1.2
 https://github.com/google/recaptcha
 
 1.0.0-rc1
