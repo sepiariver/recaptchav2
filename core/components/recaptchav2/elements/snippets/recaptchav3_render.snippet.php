@@ -34,6 +34,7 @@ $site_key = $modx->getOption('recaptchav3.site_key', null, '');
 $lang = $modx->getOption('cultureKey', null, 'en', true);
 // https://developers.google.com/recaptcha/docs/v3 "Actions"
 $action_key = $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true);
+$token_key = $modx->getOption('recaptchav3.token_key', null, 'recaptcha-token', true);
 // new 'recaptchav3_html' Chunk
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav3_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('uri'));
@@ -41,11 +42,12 @@ $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('
 $recaptcha_html = $modx->getChunk($tpl, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => $form_id,
+    'form_id' => preg_replace('/[^A-Za-z\/_]/', '', $form_id),
     'action_key' => $action_key,
+    'token_key' => $token_key,
 ]);
 
-if ($hook) { 
+if ($hook) {
     $hook->setValue('recaptchav3_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
     return true;
 } else { // This works at least
