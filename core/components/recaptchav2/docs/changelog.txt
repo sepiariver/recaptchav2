@@ -1,6 +1,7 @@
 3.0.0-rc1
 =========
 Formalize support for ReCaptcha V3
+Cleaned up sample Chunk for "Invisible" V2
 Release candidate could use more testing
 
 2.3.0-rc1

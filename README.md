@@ -41,9 +41,9 @@ As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 ]]
 </form>
 ```
-In this usage, the recaptchav2_invisible_html renders a button with the necessary data attributes to trigger ReCaptcha.
+In this usage, the "recaptchav2_invisible_html" Chunk renders a button with the necessary data attributes to trigger ReCaptcha. NOTE: the JavaScript implementation in the Chunk requires the `&form_id` to be defined.
 
-The render snippet may or may not be usable as a preHook for FormIt at this time. NOTE: you can customize the behaviour of your ReCaptcha implementation, in accordance with [Google's developer documentation](https://developers.google.com/recaptcha/intro), by customizing the Chunks used for rendering. You can specify any Chunk in the `&tpl` property of the "recaptchavX_render" Snippets.
+The render snippet may or may not be usable as a preHook for FormIt at this time. NOTE: you can customize the behaviour of your ReCaptcha implementation, in accordance with [Google's developer documentation](https://developers.google.com/recaptcha/intro), by customizing the Chunks used for rendering. You can specify any Chunk in the `&tpl` property of the "recaptchav{n}_render" Snippets.
 
 This Extra is maintained in Github: https://github.com/sepiariver/recaptchav2
 Bug reports, comments and suggestions welcome.
