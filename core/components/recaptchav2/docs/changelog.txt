@@ -1,3 +1,7 @@
+3.0.1-rc1
+=========
+Add token_key System Setting to build pkg
+
 3.0.0-rc1
 =========
 Formalize support for ReCaptcha V3
