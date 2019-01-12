@@ -75,7 +75,7 @@ $error = null;
 if (isset($hook)){
 // Was there a reCAPTCHA response?
     if ($hook->getValue($token_key)) {
-        $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME']) // MODX-y way?
+        $resp = $recaptcha->setExpectedHostname(parse_url($modx->getOption('site_url'), PHP_URL_HOST))
                   ->setExpectedAction($hook->getValue($action_key))
                   ->setScoreThreshold($threshold)
                   ->verify($hook->getValue($token_key), $ip);
