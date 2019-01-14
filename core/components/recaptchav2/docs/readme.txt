@@ -8,7 +8,7 @@ Version 2+ updates the base Google Recaptcha class to the latest 1.1.2, includin
 You must generate API keys for your domain here: [https://www.google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
 and enter them into the System Settings before you can use ReCaptchaV2. NOTE: You must choose V2 or V3 in the ReCaptcha admin, when generating your client keys. You can use both on a single MODX install with this Extra—there are separate system settings for V2 and V3.
 
-###USAGE EXAMPLE:
+### USAGE EXAMPLE:
 
 ```
 [[!FormIt?

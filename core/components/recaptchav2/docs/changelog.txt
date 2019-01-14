@@ -1,6 +1,7 @@
 3.0.1-rc1
 =========
 Add token_key System Setting to build pkg
+Set expected hostname from MODX config
 
 3.0.0-rc1
 =========
