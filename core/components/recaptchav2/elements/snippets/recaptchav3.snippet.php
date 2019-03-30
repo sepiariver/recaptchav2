@@ -28,21 +28,39 @@
  * THE SOFTWARE.
  */
 
+// Require hook object
+if (!$hook) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'RecaptchaV3 requires hook object.');
+    return;
+}
+
 // Register API keys at https://www.google.com/recaptcha/admin
-$site_key = $modx->getOption('recaptchav3.site_key', null, '');
-$secret = $modx->getOption('recaptchav3.secret_key', null, '');
+$props['site_key'] = $modx->getOption('recaptchav3.site_key', null, '');
+$props['secret_key'] = $modx->getOption('recaptchav3.secret_key', null, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
-$lang = $modx->getOption('cultureKey', null, 'en');
+$props['lang'] = $modx->getOption('cultureKey', null, 'en');
 // https://developers.google.com/recaptcha/docs/v3 "Actions"
-$action_key = $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true);
-$token_key = $modx->getOption('recaptchav3.token_key', null, 'recaptcha-token', true);
+$props['action_key'] = $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true);
+$props['token_key'] = $modx->getOption('recaptchav3.token_key', null, 'recaptcha-token', true);
 
 // Options
+$hookConfig = [];
 if ($hook->formit) {
-    $properties = array_merge(array(), $hook->formit->config);
+    $hookConfig = $hook->formit->config;
+} elseif ($hook->login) {
+    $hookConfig = $hook->login->controller->config;
 }
-$threshold = floatval($modx->getOption('recaptchaThreshold', $properties, 0.7, true));
-$ip = $modx->getOption('HTTP_CF_CONNECTING_IP', $_SERVER, $_SERVER['REMOTE_ADDR'], true);
+foreach ($hookConfig as $k => $v) {
+    if (strpos($k, 'recaptchav3.') === 0) {
+        $k = substr($k, 12);
+        $props[$k] = $v;
+    }
+}
+
+// Defaults
+$props['threshold'] = floatval($modx->getOption('threshold', $props, 0.5, true));
+$props['display_resp_errors'] = $modx->getOption('display_resp_errors', $props, true);
+$props['ip'] = $modx->getOption('HTTP_CF_CONNECTING_IP', $_SERVER, $_SERVER['REMOTE_ADDR'], true);
 
 // make sure the modLexicon class is loaded by instantiating
 $modx->getService('lexicon','modLexicon');
@@ -50,7 +68,7 @@ $modx->getService('lexicon','modLexicon');
 $modx->lexicon->load('recaptchav2:default');
 // get the message from default.inc.php from the correct lang
 $tech_err_msg = $modx->lexicon('recaptchav2.technical_error_message');
-$recaptcha_err_msg = $modx->lexicon('recaptchav2.recaptcha_error_message');
+$recaptcha_err_msg = $modx->lexicon('recaptchav2.recaptchav3_error_message');
 
 // Get the class
 $recaptchaPath = $modx->getOption('recaptchav2.core_path', null, $modx->getOption('core_path') . 'components/recaptchav2/');
@@ -60,7 +78,13 @@ if (!file_exists($recaptchaPath . 'autoload.php')) {
     return false;
 }
 require_once($recaptchaPath . 'autoload.php');
-$recaptcha = new \ReCaptcha\ReCaptcha($secret, new \ReCaptcha\RequestMethod\CurlPost());
+try {
+    $recaptcha = new \ReCaptcha\ReCaptcha($props['secret_key'], new \ReCaptcha\RequestMethod\CurlPost());
+} catch (Exception $e) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Failed to load Recaptcha class.');
+    return false;
+}
+
 if (!($recaptcha instanceof \ReCaptcha\ReCaptcha)) {
     $hook->addError('recaptchav3_error', $tech_err_msg);
     $modx->log(modX::LOG_LEVEL_ERROR, 'Failed to load Recaptcha class.');
@@ -71,25 +95,32 @@ if (!($recaptcha instanceof \ReCaptcha\ReCaptcha)) {
 $resp = null;
 // The error code from reCAPTCHA, if any
 $error = null;
-// Check if being used as hook
-if (isset($hook)){
+
 // Was there a reCAPTCHA response?
-    if ($hook->getValue($token_key)) {
-        $resp = $recaptcha->setExpectedHostname(parse_url($modx->getOption('site_url'), PHP_URL_HOST))
-                  ->setExpectedAction($hook->getValue($action_key))
-                  ->setScoreThreshold($threshold)
-                  ->verify($hook->getValue($token_key), $ip);
-    }
+if ($hook->getValue($props['token_key'])) {
+    $resp = $recaptcha->setExpectedHostname(parse_url($modx->getOption('site_url'), PHP_URL_HOST))
+              ->setExpectedAction($hook->getValue($props['action_key']))
+              ->setScoreThreshold($props['threshold'])
+              ->verify($hook->getValue($props['token_key']), $props['ip']);
+
+}
 
 // Hook pass/fail
-    if ($resp != null && $resp->isSuccess()) {
-        return true;
-    } else {
-        $hook->addError('recaptchav3_error', $recaptcha_err_msg);
-        $modx->log(modX::LOG_LEVEL_DEBUG, print_r($resp, true));
-        return false;
+if ($resp != null && $resp->isSuccess()) {
+    return true;
+} else {
+    $msg = '';
+    if ($props['display_resp_errors']) {
+        foreach ($resp->getErrorCodes() as $error) {
+            $msg .= $error . "\n";
+        }
     }
+    if (empty($msg)) $msg = $recaptcha_err_msg;
+    $hook->addError('recaptchav3_error', $msg);
+    $modx->log(modX::LOG_LEVEL_DEBUG, print_r($resp, true));
+    return false;
 }
+
 
 // Checks failed
 return false;

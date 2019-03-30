@@ -33,8 +33,10 @@ $site_key = $modx->getOption('recaptchav3.site_key', null, '');
 // reCAPTCHA supported 40+ languages listed here: https://developers.google.com/recaptcha/docs/language
 $lang = $modx->getOption('cultureKey', null, 'en', true);
 // https://developers.google.com/recaptcha/docs/v3 "Actions"
-$action_key = $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true);
-$token_key = $modx->getOption('recaptchav3.token_key', null, 'recaptcha-token', true);
+$action_key = $modx->getOption('action_key', $scriptProperties, $modx->getOption('recaptchav3.action_key', null, 'recaptcha-action', true), true);
+
+$token_key = $modx->getOption('token_key', $scriptProperties, $modx->getOption('recaptchav3.token_key', null, 'recaptcha-token', true), true);
+
 // new 'recaptchav3_html' Chunk
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav3_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('uri'));
@@ -47,9 +49,4 @@ $recaptcha_html = $modx->getChunk($tpl, [
     'token_key' => $token_key,
 ]);
 
-if ($hook) {
-    $hook->setValue('recaptchav3_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
-    return true;
-} else { // This works at least
-    return $recaptcha_html;
-}
+return $recaptcha_html;

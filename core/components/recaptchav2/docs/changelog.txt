@@ -1,3 +1,8 @@
+3.1.0-rc1
+=========
+Better handling of Snippet properties
+Better support multiple forms 
+
 3.0.1-rc1
 =========
 Add token_key System Setting to build pkg
