@@ -6,7 +6,7 @@ It can also be used with the Login Extra as a preHook, as of version 1.0.0
 Version 2+ updates the base Google Recaptcha class to the latest 1.1.2, including autoloading and cURL support. https://github.com/google/recaptcha
 
 You must generate API keys for your domain here: [https://www.google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
-and enter them into the System Settings before you can use ReCaptchaV2. NOTE: You must choose V2 or V3 in the ReCaptcha admin, when generating your client keys. You can use both on a single MODX install with this Extra—there are separate system settings for V2 and V3.
+and enter them into the System Settings before you can use ReCaptchaV2. **IMPORTANT**: You must choose V2 or V3 in the ReCaptcha admin, when generating your client keys. You can use both V2 and V3 on a single MODX install with this Extra--**there are separate system settings for V2 and V3**.
 
 ### USAGE EXAMPLES:
 
@@ -43,7 +43,7 @@ As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 ```
 In this usage, the "recaptchav2_invisible_html" Chunk renders a button with the necessary data attributes to trigger ReCaptcha. NOTE: the JavaScript implementation in the Chunk requires the `&form_id` to be defined.
 
-As of 3.1+, support for multiple forms in RecaptchaV3 is improved.
+As of 3.1+, support for multiple forms in RecaptchaV3 is improved. The threshold for a passing verification score can be customized per Snippet call with the `recaptchav3.threshold` property.
 
 ```
 <h2>Form Test 1</h2>
@@ -53,6 +53,7 @@ As of 3.1+, support for multiple forms in RecaptchaV3 is improved.
     &formName=`form-test-1`
     &recaptchav3.token_key=`token-1`
     &recaptchav3.action_key=`action-1`
+    &recaptchav3.threshold=`0.9`
     &submitVar=`submit1`
 ]]
 
@@ -75,6 +76,7 @@ As of 3.1+, support for multiple forms in RecaptchaV3 is improved.
     &formName=`form-test-2`
     &recaptchav3.token_key=`token-2`
     &recaptchav3.action_key=`action-2`
+    &recaptchav3.threshold=`0.5`
     &submitVar=`submit2`
 ]]
 
