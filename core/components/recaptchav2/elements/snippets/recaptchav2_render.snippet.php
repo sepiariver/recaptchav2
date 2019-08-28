@@ -35,11 +35,13 @@ $lang = $modx->getOption('cultureKey', null, 'en', true);
 // use 'recaptchav2_invisible_html' inside form element for invisible recaptcha
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav2_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, '');
+$button_caption = $modx->getOption('button_caption', $scriptProperties, '');
 
 $recaptcha_html = $modx->getChunk($tpl, array(
     'site_key' => $site_key,
     'lang' => $lang,
     'form_id' => $form_id,
+    'button_caption' => $button_caption,
     ));
 
 if ($hook) { 
