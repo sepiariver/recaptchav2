@@ -110,7 +110,7 @@ if ($resp != null && $resp->isSuccess()) {
     return true;
 } else {
     $msg = '';
-    if ($props['display_resp_errors']) {
+    if ($resp != null && $props['display_resp_errors']) {
         foreach ($resp->getErrorCodes() as $error) {
             $msg .= $error . "\n";
         }
