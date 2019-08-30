@@ -1,3 +1,7 @@
+3.2.1-beta1 
+===========
+B/C fix on regex nonsense 
+
 3.2.0-beta1 
 ===========
 Thanks to @jcdm and @excelerondesign for PRs. Properties now passed to TPL Chunks.
