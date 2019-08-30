@@ -36,11 +36,13 @@ $lang = $modx->getOption('cultureKey', null, 'en', true);
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav2_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, '');
 
-$recaptcha_html = $modx->getChunk($tpl, array(
+// Merge scriptProperties to support arbitrary placeholders in template
+$props = array_merge($scriptProperties, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => $form_id,
-    ));
+    'form_id' => preg_replace('/[^\w-]*/', '', $form_id),
+]);
+$recaptcha_html = $modx->getChunk($tpl, $props);
 
 if ($hook) { 
     $hook->setValue('recaptchav2_html', $recaptcha_html); // This won't re-render on page reload there's validation errors

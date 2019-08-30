@@ -41,12 +41,14 @@ $token_key = $modx->getOption('token_key', $scriptProperties, $modx->getOption('
 $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav3_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('uri'));
 
-$recaptcha_html = $modx->getChunk($tpl, [
+// Merge scriptProperties to support arbitrary placeholders in template
+$props = array_merge($scriptProperties, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => preg_replace('/[^A-Za-z\/_]/', '', $form_id),
+    'form_id' => preg_replace('/[^\w-]*/', '', $form_id),
     'action_key' => $action_key,
     'token_key' => $token_key,
 ]);
+$recaptcha_html = $modx->getChunk($tpl, $props);
 
 return $recaptcha_html;
