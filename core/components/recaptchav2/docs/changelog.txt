@@ -1,3 +1,9 @@
+3.2.0-beta1 
+===========
+Thanks to @jcdm and @excelerondesign for PRs. Properties now passed to TPL Chunks.
+Better documentation #44
+Fix form_id regex
+
 3.1.1-rc1
 =========
 Italian lexicon.

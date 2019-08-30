@@ -8,7 +8,68 @@ Version 2+ updates the base Google Recaptcha class to the latest 1.1.2, includin
 You must generate API keys for your domain here: [https://www.google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
 and enter them into the System Settings before you can use ReCaptchaV2. **IMPORTANT**: You must choose V2 or V3 in the ReCaptcha admin, when generating your client keys. You can use both V2 and V3 on a single MODX install with this Extra—**there are separate system settings for V2 and V3**.
 
-### USAGE EXAMPLES:
+## Snippets
+
+### recaptchav2
+
+Designed to be used as a FormIt or Login hook. The hook stops form processing and returns an error if the Recaptcha challenge fails. Use with Google Recaptcha Version 2.
+
+#### System Settings
+
+- recaptchav2.site_key      Site key from Google. Required for front end. Default ''
+- recaptchav2.secret_key    Secret key from Google. Required for back end API call. Default ''
+- cultureKey                MODX culture key for language. Default 'en'
+
+### recaptchav2_render
+
+Renders the Recaptcha form element for Google Recaptcha Version 2 validation.
+
+#### System Settings
+
+- recaptchav2.site_key      Site key from Google. Required for front end. Default ''
+- cultureKey                MODX culture key for language. Default 'en'
+
+#### Snippet Properties
+
+- tpl                       Template Chunk to use for rendering. Default 'recaptchav2_html'
+- form_id                   String to use as ID attribute of recaptcha form. Default ''
+
+### recaptchav3
+
+Designed to be used as a FormIt or Login hook. The hook stops form processing and returns an error if the Recaptcha challenge fails. Use with Google Recaptcha Version 3.
+
+#### System Settings
+
+- recaptchav3.site_key      Site key from Google. Required for front end. Default ''
+- recaptchav3.secret_key    Secret key from Google. Required for back end API call. Default ''
+- cultureKey                MODX culture key for language. Default 'en'
+- recaptchav3.action_key    Key to use for the action. See [this post](https://sepiariver.com/modx/recaptchav2-supports-recaptchav3/) for more information. Default 'recaptcha-action'
+- recaptchav3.token_key     In V3 the token must be passed to the back end form processor. Default 'recaptcha-token'
+
+#### Snippet Properties
+
+- threshold                 Confidence threshold. If the confidence returned by Google's Recaptcha API response is below this value the Recaptcha will fail. Default 0.5
+- display_resp_errors       Option to display API response errors. Default true
+
+### recaptchav3_render
+
+Renders the Recaptcha form element for Google Recaptcha Version 3 validation styles.
+
+#### System Settings
+
+- recaptchav2.site_key      Site key from Google. Required for front end. Default ''
+- cultureKey                MODX culture key for language. Default 'en'
+- recaptchav3.action_key    Key to use for the action. See [this post](https://sepiariver.com/modx/recaptchav2-supports-recaptchav3/) for more information. Default 'recaptcha-action'
+- recaptchav3.token_key     In V3 the token must be passed to the back end form processor. Default 'recaptcha-token'
+
+#### Snippet Properties
+
+- tpl                       Template Chunk to use for rendering. Default 'recaptchav3_html'
+- form_id                   String to use as ID attribute of recaptcha form. Default ''
+
+## USAGE EXAMPLES:
+
+### FormIt Hook
 
 ```
 [[!FormIt?
@@ -16,11 +77,16 @@ and enter them into the System Settings before you can use ReCaptchaV2. **IMPORT
    ...
 ]]
 ```
+(V3)
 
-OR
+### Login Hook
+
 ```
 [[!Login? &preHooks=`recaptchav2`]]
 ```
+(V2)
+
+### Render Snippet
 
 You will also need to call the accompanying form element renderer snippet somewhere in your html form, for example:
 
@@ -30,6 +96,7 @@ You will also need to call the accompanying form element renderer snippet somewh
     [[!+fi.error.recaptchav3_error]]
 </div>
 ```
+(V3)
 
 As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 
@@ -41,6 +108,8 @@ As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 ]]
 </form>
 ```
+(V2)
+
 In this usage, the "recaptchav2_invisible_html" Chunk renders a button with the necessary data attributes to trigger ReCaptcha. NOTE: the JavaScript implementation in the Chunk requires the `&form_id` to be defined.
 
 As of 3.1+, support for multiple forms in RecaptchaV3 is improved. The threshold for a passing verification score can be customized per Snippet call with the `recaptchav3.threshold` property.
