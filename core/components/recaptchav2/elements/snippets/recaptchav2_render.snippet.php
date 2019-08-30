@@ -37,10 +37,11 @@ $tpl = $modx->getOption('tpl', $scriptProperties, 'recaptchav2_html', true);
 $form_id = $modx->getOption('form_id', $scriptProperties, '');
 
 // Merge scriptProperties to support arbitrary placeholders in template
+// The ID regex is like that for a reason, see Google
 $props = array_merge($scriptProperties, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => preg_replace('/[^\w]*/', '', $form_id),
+    'form_id' => preg_replace('/[^A-Za-z_]*/', '', $form_id),
 ]);
 $recaptcha_html = $modx->getChunk($tpl, $props);
 
