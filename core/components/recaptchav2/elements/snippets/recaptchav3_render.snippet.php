@@ -45,7 +45,7 @@ $form_id = $modx->getOption('form_id', $scriptProperties, $modx->resource->get('
 $props = array_merge($scriptProperties, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => preg_replace('/[^\w-]*/', '', $form_id),
+    'form_id' => preg_replace('/[^\w]*/', '', $form_id),
     'action_key' => $action_key,
     'token_key' => $token_key,
 ]);

@@ -40,7 +40,7 @@ $form_id = $modx->getOption('form_id', $scriptProperties, '');
 $props = array_merge($scriptProperties, [
     'site_key' => $site_key,
     'lang' => $lang,
-    'form_id' => preg_replace('/[^\w-]*/', '', $form_id),
+    'form_id' => preg_replace('/[^\w]*/', '', $form_id),
 ]);
 $recaptcha_html = $modx->getChunk($tpl, $props);
 
