@@ -1,5 +1,5 @@
 # ReCaptchaV2
-ReCaptchaV2 (version 3.x) integrates V2 AND V3 of Google's ReCaptcha service into MODX as a FormIt hook.
+[ReCaptchaV2 (version 3.x) integrates V2 AND V3 of Google's ReCaptcha service into MODX as a FormIt hook](https://sepiariver.com/modx/recaptchav2-supports-recaptchav3/).
 
 It can also be used with the Login Extra as a preHook, as of version 1.0.0
 
