@@ -1,3 +1,7 @@
+3.2.2-pl
+===========
+Better error messaging in multiple languages. Thanks @Jako
+
 3.2.1-beta1 
 ===========
 B/C fix on regex nonsense 

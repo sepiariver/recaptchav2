@@ -1,4 +1,5 @@
 # ReCaptchaV2
+
 [ReCaptchaV2 (version 3.x) integrates V2 AND V3 of Google's ReCaptcha service into MODX as a FormIt hook](https://sepiariver.com/modx/recaptchav2-supports-recaptchav3/).
 
 It can also be used with the Login Extra as a preHook, as of version 1.0.0
@@ -7,6 +8,10 @@ Version 2+ updates the base Google Recaptcha class to the latest 1.1.2, includin
 
 You must generate API keys for your domain here: [https://www.google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
 and enter them into the System Settings before you can use ReCaptchaV2. **IMPORTANT**: You must choose V2 or V3 in the ReCaptcha admin, when generating your client keys. You can use both V2 and V3 on a single MODX install with this Extra—**there are separate system settings for V2 and V3**.
+
+## Guide
+
+For some quick start examples and implementation guide, go [here](https://sepiariver.com/modx/a-guide-to-recaptcha-v3-for-modx-cms/).
 
 ## Snippets
 
