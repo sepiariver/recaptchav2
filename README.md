@@ -11,7 +11,7 @@ and enter them into the System Settings before you can use ReCaptchaV2. **IMPORT
 
 ## Guide
 
-For some quick start examples and implementation guide, go [here](https://sepiariver.com/modx/a-guide-to-recaptcha-v3-for-modx-cms/).
+For some quick start examples and implementation guide, go [here](https://sepiariver.com/modx/a-guide-to-recaptcha-v3-for-modx-cms/). It demonstrates common use cases like triggering recaptcha on a user interaction to avoid timeouts, and invoking multiple recaptcha forms on a page.
 
 ## Snippets
 
