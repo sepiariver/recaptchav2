@@ -45,7 +45,7 @@ $props = array_merge($scriptProperties, [
 ]);
 $recaptcha_html = $modx->getChunk($tpl, $props);
 
-if (isset($hook) && $hook instanceof fiHooks) { 
+if (isset($hook) && is_object($hook)) { 
     $hook->setValue('recaptchav2_html', $recaptcha_html); // This won't re-render on page reload there's validation errors
     return true;
 } else { // This works at least

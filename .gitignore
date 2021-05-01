@@ -6,3 +6,4 @@ config.core.php
 _packages/*.*
 !_packages/.gitignore
 !_packages/*.zip
+.DS_Store
