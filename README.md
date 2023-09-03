@@ -11,7 +11,7 @@ and enter them into the System Settings before you can use ReCaptchaV2. **IMPORT
 
 ## Guide
 
-For some quick start examples and implementation guide, go [here](https://sepiariver.com/modx/a-guide-to-recaptcha-v3-for-modx-cms/). It demonstrates common use cases like triggering recaptcha on a user interaction to avoid timeouts, and invoking multiple recaptcha forms on a page.
+For some quick start examples and implementation guide, go [here](https://sepiariver.com/modx/a-guide-to-recaptcha-v3-for-modx-cms/).
 
 ## Snippets
 
@@ -102,6 +102,20 @@ You will also need to call the accompanying form element renderer snippet somewh
 </div>
 ```
 (V3)
+
+Example with non-default template Chunk:
+
+```
+<form id="my-unique-form-id">
+    [[recaptchav3_render?
+        &tpl=`recaptchav3_submit_html`
+        &form_id=`my-unique-form-id`
+    ]]
+    [[!+fi.error.recaptchav3_error]]
+    <!-- other form elements. needs submit button -->
+</form>
+```
+In version 3.3.0 a sample Chunk was packaged for triggering Recaptcha on form submit rather than on page load. With this implementation the form element MUST have a `id` attribute matching the `form_id` parameter in the Snippet call.
 
 As of 2.3+, you can use the "Invisible Recaptcha" implementation:
 
