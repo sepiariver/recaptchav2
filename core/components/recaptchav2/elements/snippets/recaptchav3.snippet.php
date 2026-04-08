@@ -45,10 +45,12 @@ $props['token_key'] = $modx->getOption('recaptchav3.token_key', null, 'recaptcha
 
 // Options
 $hookConfig = [];
-if ($hook->formit) {
+if (isset($hook->formit)) {
     $hookConfig = $hook->formit->config;
-} elseif ($hook->login) {
+} elseif (isset($hook->login)) {
     $hookConfig = $hook->login->controller->config;
+} elseif (isset($hook->subscription)) {
+    $hookConfig = $hook->subscription->config;
 }
 foreach ($hookConfig as $k => $v) {
     if (strpos($k, 'recaptchav3.') === 0) {
